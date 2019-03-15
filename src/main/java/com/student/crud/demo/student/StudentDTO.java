@@ -1,8 +1,8 @@
 package com.student.crud.demo.student;
 
 import com.student.crud.demo.contract.Convertible;
-import com.student.crud.demo.propertie.Address;
-import com.student.crud.demo.propertie.Name;
+import com.student.crud.demo.property.Address;
+import com.student.crud.demo.property.Name;
 
 public class StudentDTO implements Convertible<StudentModel> {
 
