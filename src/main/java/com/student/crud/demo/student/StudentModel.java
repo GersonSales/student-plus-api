@@ -23,11 +23,13 @@ public class StudentModel implements Convertible<StudentDTO>, Updatable<StudentM
   private Name name;
   private Address address;
 
+  public StudentModel() { }
+
   /*default*/ StudentModel(final Long registrationNumber,
                            final Name name,
                            final Address address) {
-    this.name = name;
     this.registrationNumber = registrationNumber;
+    this.name = name;
     this.address = address;
   }
 
@@ -35,7 +37,7 @@ public class StudentModel implements Convertible<StudentDTO>, Updatable<StudentM
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(final String id) {
     this.id = id;
   }
 
@@ -43,7 +45,7 @@ public class StudentModel implements Convertible<StudentDTO>, Updatable<StudentM
     return name;
   }
 
-  public void setName(Name name) {
+  public void setName(final Name name) {
     this.name = name;
   }
 
@@ -51,7 +53,7 @@ public class StudentModel implements Convertible<StudentDTO>, Updatable<StudentM
     return registrationNumber;
   }
 
-  public void setRegistrationNumber(Long registrationNumber) {
+  public void setRegistrationNumber(final Long registrationNumber) {
     this.registrationNumber = registrationNumber;
   }
 
@@ -59,7 +61,7 @@ public class StudentModel implements Convertible<StudentDTO>, Updatable<StudentM
     return address;
   }
 
-  public void setAddress(Address address) {
+  public void setAddress(final Address address) {
     this.address = address;
   }
 
