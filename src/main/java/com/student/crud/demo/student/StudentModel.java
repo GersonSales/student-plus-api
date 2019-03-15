@@ -2,8 +2,8 @@ package com.student.crud.demo.student;
 
 import com.student.crud.demo.contract.Convertible;
 import com.student.crud.demo.contract.Updatable;
-import com.student.crud.demo.propertie.Address;
-import com.student.crud.demo.propertie.Name;
+import com.student.crud.demo.property.Address;
+import com.student.crud.demo.property.Name;
 import org.hibernate.annotations.GenericGenerator;
 import org.modelmapper.ModelMapper;
 
