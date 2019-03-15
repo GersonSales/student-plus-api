@@ -7,6 +7,8 @@ public class Address {
   private String street;
   private String city;
 
+  public Address() { }
+
   public Address(final String street, final String city) {
     this.street = street;
     this.city = city;
