@@ -7,6 +7,8 @@ public class Name {
   private String firstName;
   private String lastName;
 
+  public Name() { }
+
   public Name(final String firstName, final String lastName) {
     this.firstName = firstName;
     this.lastName = lastName;
