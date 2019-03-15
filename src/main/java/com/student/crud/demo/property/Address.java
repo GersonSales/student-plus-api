@@ -18,7 +18,7 @@ public class Address {
     return street;
   }
 
-  public void setStreet(String street) {
+  public void setStreet(final String street) {
     this.street = street;
   }
 
@@ -26,7 +26,7 @@ public class Address {
     return city;
   }
 
-  public void setCity(String city) {
+  public void setCity(final String city) {
     this.city = city;
   }
 }
