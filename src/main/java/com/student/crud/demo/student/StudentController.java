@@ -17,12 +17,13 @@ public class StudentController {
     assert this.studentService != null;
   }
 
-  @PostMapping
+  @PostMapping("/sign-up")
   public ResponseEntity<StudentDTO> post(@RequestBody final StudentDTO studentDTO) {
     try {
       final StudentDTO createStudent = this.studentService.createStudent(studentDTO);
       return ResponseEntity.status(HttpStatus.CREATED).body(createStudent);
     } catch (final Throwable throwable) {
+      throwable.printStackTrace();
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }

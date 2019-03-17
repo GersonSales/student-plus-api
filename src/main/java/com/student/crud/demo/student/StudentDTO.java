@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.student.crud.demo.contract.Convertible;
 import com.student.crud.demo.property.Address;
+import com.student.crud.demo.property.Credentials;
 import com.student.crud.demo.property.Name;
 
 public class StudentDTO implements Convertible<StudentModel> {
@@ -11,13 +12,26 @@ public class StudentDTO implements Convertible<StudentModel> {
   private String id;
   private Long registrationNumber;
 
+  @JsonProperty("email")
+  private String emailCredentials;
+
+  @JsonProperty("password")
+  private String passwordCredentials;
+
   private String firstName;
   private String lastName;
 
+  @JsonProperty("street")
   private String streetAddress;
+
+  @JsonProperty("city")
   private String cityAddress;
 
-  public StudentDTO() { }
+  @JsonProperty("state")
+  private String stateAddress;
+
+  public StudentDTO() {
+  }
 
   public String getId() {
     return id;
@@ -33,6 +47,22 @@ public class StudentDTO implements Convertible<StudentModel> {
 
   public void setRegistrationNumber(final Long registrationNumber) {
     this.registrationNumber = registrationNumber;
+  }
+
+  public String getEmailCredentials() {
+    return emailCredentials;
+  }
+
+  public void setEmailCredentials(String emailCredentials) {
+    this.emailCredentials = emailCredentials;
+  }
+
+  public String getPasswordCredentials() {
+    return passwordCredentials;
+  }
+
+  public void setPasswordCredentials(String passwordCredentials) {
+    this.passwordCredentials = passwordCredentials;
   }
 
   public String getFirstName() {
@@ -55,12 +85,11 @@ public class StudentDTO implements Convertible<StudentModel> {
     return streetAddress;
   }
 
-  @JsonProperty("street")
+
   public void setStreetAddress(final String streetAddress) {
     this.streetAddress = streetAddress;
   }
 
-  @JsonProperty("city")
   public String getCityAddress() {
     return cityAddress;
   }
@@ -69,11 +98,20 @@ public class StudentDTO implements Convertible<StudentModel> {
     this.cityAddress = cityAddress;
   }
 
+  public String getStateAddress() {
+    return stateAddress;
+  }
+
+  public void setStateAddress(String stateAddress) {
+    this.stateAddress = stateAddress;
+  }
+
   @Override
   public StudentModel convert() {
+    final Credentials credentials = new Credentials(getEmailCredentials(), getPasswordCredentials());
     final Name name = new Name(getFirstName(), getLastName());
-    final Address address = new Address(getStreetAddress(), getCityAddress());
+    final Address address = new Address(getStreetAddress(), getCityAddress(), getStateAddress());
 
-    return new StudentModel(getRegistrationNumber(), name, address);
+    return new StudentModel(getRegistrationNumber(), credentials, name, address);
   }
 }

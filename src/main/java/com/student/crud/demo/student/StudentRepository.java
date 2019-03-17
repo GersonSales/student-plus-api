@@ -8,4 +8,6 @@ import java.util.List;
 public interface StudentRepository extends CrudRepository<StudentModel, String> {
   @Override
   List<StudentModel> findAll();
+
+  StudentModel findByCredentials_Email(final String email);
 }

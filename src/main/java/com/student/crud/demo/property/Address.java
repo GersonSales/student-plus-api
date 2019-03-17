@@ -6,12 +6,14 @@ import javax.persistence.Embeddable;
 public class Address {
   private String street;
   private String city;
+  private String state;
 
   public Address() { }
 
-  public Address(final String street, final String city) {
+  public Address(final String street, final String city, final String state) {
     this.street = street;
     this.city = city;
+    this.state = state;
   }
 
   public String getStreet() {
@@ -28,5 +30,13 @@ public class Address {
 
   public void setCity(final String city) {
     this.city = city;
+  }
+
+  public String getState() {
+    return state;
+  }
+
+  public void setState(String state) {
+    this.state = state;
   }
 }
