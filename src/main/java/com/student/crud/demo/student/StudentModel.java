@@ -1,10 +1,12 @@
 package com.student.crud.demo.student;
 
 import com.student.crud.demo.contract.Convertible;
+import com.student.crud.demo.contract.Modelable;
 import com.student.crud.demo.contract.Updatable;
 import com.student.crud.demo.property.Address;
 import com.student.crud.demo.property.Credentials;
 import com.student.crud.demo.property.Name;
+import com.student.crud.demo.property.ProfileImage;
 import org.hibernate.annotations.GenericGenerator;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-public class StudentModel implements Convertible<StudentDTO>, Updatable<StudentModel> {
+public class StudentModel implements Convertible<StudentDTO>, Updatable<StudentModel>, Modelable {
 
   @Id
   @NotNull
@@ -28,6 +30,9 @@ public class StudentModel implements Convertible<StudentDTO>, Updatable<StudentM
   private Credentials credentials;
   private Name name;
   private Address address;
+  private ProfileImage profileImage;
+
+
 
   public StudentModel() {
   }
@@ -35,11 +40,13 @@ public class StudentModel implements Convertible<StudentDTO>, Updatable<StudentM
   /*default*/ StudentModel(final Long registrationNumber,
                            final Credentials credentials,
                            final Name name,
-                           final Address address) {
+                           final Address address,
+                           final ProfileImage profileImage) {
     this.registrationNumber = registrationNumber;
     this.credentials = credentials;
     this.name = name;
     this.address = address;
+    this.profileImage = profileImage;
   }
 
   public String getId() {
@@ -99,6 +106,14 @@ public class StudentModel implements Convertible<StudentDTO>, Updatable<StudentM
     this.address = address;
   }
 
+  public ProfileImage getProfileImage() {
+    return profileImage;
+  }
+
+  public void setProfileImage(final ProfileImage profileImage) {
+    this.profileImage = profileImage;
+  }
+
   @Override
   public StudentDTO convert() {
     final ModelMapper modelMapper = new ModelMapper();
@@ -111,5 +126,6 @@ public class StudentModel implements Convertible<StudentDTO>, Updatable<StudentM
     setCredentials(update.getCredentials());
     setAddress(update.getAddress());
     setName(update.getName());
+    setProfileImage(update.getProfileImage());
   }
 }

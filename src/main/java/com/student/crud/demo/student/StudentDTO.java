@@ -1,11 +1,12 @@
 package com.student.crud.demo.student;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.student.crud.demo.contract.Convertible;
 import com.student.crud.demo.property.Address;
 import com.student.crud.demo.property.Credentials;
 import com.student.crud.demo.property.Name;
+import com.student.crud.demo.property.ProfileImage;
 
 public class StudentDTO implements Convertible<StudentModel> {
 
@@ -15,7 +16,6 @@ public class StudentDTO implements Convertible<StudentModel> {
   @JsonProperty("email")
   private String emailCredentials;
 
-  @JsonProperty("password")
   private String passwordCredentials;
 
   private String firstName;
@@ -29,6 +29,9 @@ public class StudentDTO implements Convertible<StudentModel> {
 
   @JsonProperty("state")
   private String stateAddress;
+
+  private String profileImageName;
+  private String profileImageUrl;
 
   public StudentDTO() {
   }
@@ -57,10 +60,12 @@ public class StudentDTO implements Convertible<StudentModel> {
     this.emailCredentials = emailCredentials;
   }
 
+  @JsonIgnore
   public String getPasswordCredentials() {
     return passwordCredentials;
   }
 
+  @JsonProperty("password")
   public void setPasswordCredentials(String passwordCredentials) {
     this.passwordCredentials = passwordCredentials;
   }
@@ -106,12 +111,34 @@ public class StudentDTO implements Convertible<StudentModel> {
     this.stateAddress = stateAddress;
   }
 
+  public String getProfileImageName() {
+    return profileImageName;
+  }
+
+  public void setProfileImageName(final String profileImageName) {
+    this.profileImageName = profileImageName;
+  }
+
+  public String getProfileImageUrl() {
+    return profileImageUrl;
+  }
+
+  public void setProfileImageUrl(String profileImageUrl) {
+    this.profileImageUrl = profileImageUrl;
+  }
+
   @Override
   public StudentModel convert() {
     final Credentials credentials = new Credentials(getEmailCredentials(), getPasswordCredentials());
     final Name name = new Name(getFirstName(), getLastName());
     final Address address = new Address(getStreetAddress(), getCityAddress(), getStateAddress());
+    final ProfileImage profileImage = new ProfileImage(getProfileImageName(), getProfileImageUrl());
 
-    return new StudentModel(getRegistrationNumber(), credentials, name, address);
+    return new StudentModel(
+        getRegistrationNumber(),
+        credentials,
+        name,
+        address,
+        profileImage);
   }
 }

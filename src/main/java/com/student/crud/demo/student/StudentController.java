@@ -1,10 +1,18 @@
 package com.student.crud.demo.student;
 
+import com.student.crud.demo.file.UploadedFileResponse;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
+
+import static com.student.crud.demo.file.Util.getPreparedResponseEntity;
 
 @RestController
 @RequestMapping("/students")
@@ -68,7 +76,19 @@ public class StudentController {
     } catch (final Throwable throwable) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
-
   }
 
+  @PostMapping("/{studentId}/profileImage")
+  public UploadedFileResponse postSeriesCover(@PathVariable("studentId") final String studentId,
+                                              @RequestParam("file") final MultipartFile file) {
+    return this.studentService.attachStudentProfileImage(studentId, file);
+  }
+
+
+  @GetMapping("/{studentId}/profileImage")
+  public ResponseEntity<Resource> getSeriesCover(@PathVariable final String studentId,
+                                                 final HttpServletRequest request) {
+    final Resource resource = this.studentService.findSeriesCover(studentId);
+    return getPreparedResponseEntity(request, resource);
+  }
 }

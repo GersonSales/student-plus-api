@@ -17,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import static com.student.crud.demo.config.security.SecurityConstants.PROFILE_IMAGE_URL;
 import static com.student.crud.demo.config.security.SecurityConstants.SIGN_UP_URL;
 
 @EnableWebSecurity
@@ -35,6 +36,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     http.cors().and().csrf().disable()
         .authorizeRequests()
         .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+        .antMatchers(HttpMethod.GET, PROFILE_IMAGE_URL).permitAll()
         .anyRequest().authenticated()
         .and()
         .addFilter(new JWTAuthenticationFilter(authenticationManager()))
