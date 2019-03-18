@@ -97,9 +97,9 @@ public class StudentService implements UserDetailsService {
   }
 
   public void update(final StudentModel studentModel) {
-    final StudentModel foundSeries = findModelById(studentModel.getId());
-    foundSeries.update(studentModel);
-    save(foundSeries);
+    final StudentModel foundStudent = findModelById(studentModel.getId());
+    foundStudent.update(studentModel);
+    save(foundStudent);
   }
 
 
